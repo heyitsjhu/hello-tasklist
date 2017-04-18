@@ -1,0 +1,15 @@
+{
+  "name": "node-tasks-app",
+  "version": "0.0.1",
+  "description": "A simple Node task list application with in-file comments.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Johnny Hu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2"
+  }
+}
