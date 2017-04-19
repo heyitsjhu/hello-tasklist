@@ -1,11 +1,18 @@
 // ROUTES/TASKS.JS
 
-// Require the Express NPM module.
+// Require the Express NPM module. Whenever you need to use the features and
+// functionalities of an NPM or local module in one of your application's
+// files, you need to require that module within the file itself. Here, we
+// require Express because we need to use its Router() method.
 var express = require('express');
 
+// Express' Router() method lets us create modular, mountable route handlers.
+// The code below creates an instance of Router and assigns it to the variable,
+// router. Because a Router instance is a complete middleware and routing
+// system, we can now use 'router' to define our task routes.
 var router  = express.Router();
 
-// Require our Task model. This gives us the mongoose features
+// Require our application's Task model. This gives us the mongoose features
 // needed to create, retrieve, modify, and delete tasks from our database.
 var Task    = require('../models/task');
 
@@ -187,6 +194,26 @@ router.delete('/:id', function(req, res){
 });
 
 /**
-  modules.exports
+  In JS, creating modules is a very common practice. Basically, whenever you
+  come across a situation where you have a bunch of related code that can be
+  extracted into its own file, you'll want to create a module and encapsulate
+  that chunk of code. Creating an Express routing system specific to our tasks is one such case, which is why we've extracted the chunk of code above into its own file (this file).
+
+  In order for the rest of our application to have access to our task routes,
+  we need to make it available by assigning it to the module.exports object.
  **/
+
 module.exports = router;
+
+/**
+  Now, other files throughout our application can access the routes defined
+  in this file as long as these files include this JS file using the require
+  statement.
+
+  However, the most common place to access route files is by importing them
+  from the application's main file——in our case, from APP.JS. If you look at
+  our APP.JS file, you'll notice that we do just that. We require our task
+  routes file and assign it to the variable, taskRoutes. And then, further down
+  in APP.JS, you'll see that we then instruct our applcation to use these
+  defined routes with the specified URL prefix.
+ **/
