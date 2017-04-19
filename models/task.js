@@ -49,4 +49,32 @@ var TaskSchema = new mongoose.Schema(
     }
  **/
 
+/**
+  In JS, creating modules is a very common practice. Basically, whenever you
+  come across a situation where you have a bunch of related code that can be
+  extracted into its own file, you'll want to create a module that encapsulates
+  that chunk of code. Creating a mongoose schema for our Task model is one such
+  case, which is why we've extracted the chunk of code above into its own file
+  (this file).
+
+  In order for the rest of our application to have access to our Task model,
+  we need to make it available by assigning it to the module.exports object.
+ **/
+
 module.exports = mongoose.model('Task', TaskSchema);
+
+/**
+  The line of code above does the following:
+    * moogoose.model() compiles our model schema.
+      * the first argument is the SINGULAR name of the collection, Task.
+        (Mongoose automatically looks for the PLURAL version, tasks, in the database.)
+      * the second argument is our model's schema, which we assigned to the
+        variable, TaskSchema. So, we simply pass that variable in.
+    * this newly compiled Task model is then assigned to the module.exports
+      object, making it available in other parts of our application, so long
+      that include this JS file using the require statement in the other files.
+
+      For example, we include this file in our routes/tasks.js file because we
+      utilize the model's features to create, modify, and delete tasks based on
+      the requests that come through our routes.
+ **/
