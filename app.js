@@ -5,7 +5,9 @@
   The most common types of modules are third-party packages found on NPM.
  **/
 var express         = require('express');
+
 var path            = require('path');
+
 // body-parser parses incoming request bodies, like values submitted through
 // HTML forms. We can then retrieve those values with the  req.body property.
 var bodyParser      = require('body-parser');
@@ -14,10 +16,12 @@ var bodyParser      = require('body-parser');
 // are not available——for example, in HTML forms.
 var methodOverride  = require('method-override');
 
-// Mongoose provides a straight-forward, schema-based solution to model your
-// application data and connect it to a MongoDB database.
-// Tutorials for setting up MongoDB locally can be found here:
-// https://docs.mongodb.com/manual/administration/install-community/
+/**
+  Mongoose provides a straight-forward, schema-based solution to model your
+  application data and connect it to a MongoDB database.
+  Tutorials for setting up MongoDB locally can be found here:
+  https://docs.mongodb.com/manual/administration/install-community/
+ **/
 var mongoose        = require('mongoose');
 
 // The mongoose connect() method opens a connection between our application
@@ -25,12 +29,14 @@ var mongoose        = require('mongoose');
 // 'tasks-app'.
 mongoose.connect('mongodb://localhost/tasks-app');
 
-// Alternatively, you can use a database-as-a-service provider, such as mLab
-// (https://mlab.com/), to store your application's data. The URI provided by
-// mLab looks something like this:
-//        mongodb://<dbuser>:<dbpassword>@ds012345.mlab.com:56789/mydb
-// where <dbuser> and <dbpassword> reflects the authorized user you assign to
-// the database and 'mydb' is the name of your database.
+/**
+  Alternatively, you can use a database-as-a-service provider, such as mLab
+  (https://mlab.com/), to store your application's data. The URI provided by
+  mLab looks something like this:
+         mongodb://<dbuser>:<dbpassword>@ds012345.mlab.com:56789/mydb
+  where <dbuser> and <dbpassword> reflects the authorized user you assign to
+  the database and 'mydb' is the name of your database.
+ **/
 
 /**
   Other common types of require statements include local modules and files
@@ -45,11 +51,15 @@ var Task        = require('./models/task');
 // files for in-depth explanations on RESTful routing and conventions.
 var taskRoutes  = require('./routes/tasks');
 
-// if the environment variable, PORT, is present, sets variable equal to PORT
-// otherwise, sets variable equal to an arbitrarily chosen port (7070 in this case)
-// to view the application in locally, visit localhost:7070 when the server is running
+/**
+  Assigns the environment variable PORT, if present, to the variable, port,
+  otherwise sets an arbitrary value——in this case, 7070. This variable is
+  later assigned to Express' listen() method which creates and listens to
+  for connections at the provided port.
+ **/
 var port = process.env.PORT || 7070;
 
+//
 var app = express();
 
 /**
@@ -63,31 +73,38 @@ var app = express();
 // to the directory in which our executing script resides——in our case, APP.JS.
 app.set('views', path.join(__dirname, 'views'));
 
-// Sets the application views' default file type to 'ejs' (embedded JS).
-// The app will automatically expect all view files to be of type .ejs,
-// which will allow us to omit the file extension when referencing view
-// pages in our routes (see route files).
+/**
+  Sets the application views' default file type to 'ejs' (embedded JS).
+  The app will automatically expect all view files to be of type .ejs,
+  which will allow us to omit the file extension when referencing view
+  pages in our routes (see route files).
+ **/
 app.set('view engine', 'ejs');
 
 /**
- Express' app.use() method mounts middleware function(s) at the specified path.
- The first argument is the path for which the middleware function is invoked.
- Subsequent arguments are any number of callback functions. These mounted
- middleware is executed every time the base of the requested path matches path.
+  Express' app.use() method mounts middleware function(s) at the specified
+  path. The first argument is the path for which the middleware function is
+  invoked. Subsequent arguments are any number of callback functions. These
+  mounted middleware is executed every time the base of the requested path
+  matches path.
  **/
 
-// Only parses urlencoded bodies, returning the parsed data as key-value pairs
-// inside the req.body object. The "extended" syntax, which uses the qs
-// library allows for rich objects and arrays to be encoded into the
-// URL-encoded format, allowing for a JSON-like experience with URL-encoded.
-// For more info, see: https://www.npmjs.com/package/qs#readme
+/**
+  Only parses urlencoded bodies, returning the parsed data as key-value pairs
+  inside the req.body object. The "extended" syntax, which uses the qs
+  library allows for rich objects and arrays to be encoded into the
+  URL-encoded format, allowing for a JSON-like experience with URL-encoded.
+  For more info, see: https://www.npmjs.com/package/qs#readme
+ **/
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Specify a query string key as an argument that can then used to extract the
-// HTTP VERB we want to use (i.e., PUT or DELETE). Here, we're using the
-// arbitrary string, '_method'. You can name it anything but always try to pick
-// a name that best represents its purpose and functionality. To see this
-// method in action, please view the 'views/tasks/edit.ejs' file.
+/**
+  Specify a query string key as an argument that can then used to extract the
+  HTTP VERB we want to use (i.e., PUT or DELETE). Here, we're using the
+  arbitrary string, '_method'. You can name it anything but always try to pick
+  a name that best represents its purpose and functionality. To see this
+  method in action, please view the 'views/tasks/edit.ejs' file.
+ **/
 app.use(methodOverride('_method'));
 
 // Mount the routes assigned to our taskRoutes variable to the path, '/tasks'.
