@@ -1,32 +1,41 @@
 // ROUTES/TASKS.JS
 
-// Require the Express NPM module. Whenever you need to use the features and
-// functionalities of an NPM or local module in one of your application's
-// files, you need to require that module within the file itself. Here, we
-// require Express because we need to use its Router() method.
+/**
+  Require the Express NPM module. Whenever you need to use the features and
+  functionalities of an NPM or local module in one of your application's
+  files, you need to require that module within the file itself. Here, we
+  require Express because we need to use its Router() method.
+ **/
 var express = require('express');
 
-// Express' Router() method lets us create modular, mountable route handlers.
-// The code below creates an instance of Router and assigns it to the variable,
-// router. Because a Router instance is a complete middleware and routing
-// system, we can now use 'router' to define our task routes.
+/**
+  Express' Router() method lets us create modular, mountable route handlers.
+  The code below creates an instance of Router and assigns it to the variable,
+  router. Because a Router instance is a complete middleware and routing
+  system, we can now use 'router' to define our task routes.
+ **/
 var router  = express.Router();
 
-// Require our application's Task model. This gives us the mongoose features
-// needed to create, retrieve, modify, and delete tasks from our database.
+/**
+  Require our application's Task model. This gives us the mongoose features
+  needed to create, retrieve, modify, and delete tasks from our database.
+  Notice the double-periods (..), tells our app to look traverses up in our
+  app's file structure, from /routes into the root folder, then into the
+  /models folder. And finally, pointing to the task file within the folder.
+ **/
 var Task    = require('../models/task');
 
-/*****************************************************************************/
-/*  ACTION  ||  HTTP VERB  ||   URL PATH        ||  DESCRIPTION              */
-/*****************************************************************************/
-/*  Index   ||  GET        ||   /tasks          ||  .
-//  New     ||  GET        ||   /tasks/new      ||  .
-//  Create  ||  POST       ||   /tasks          ||  .
-//  Show    ||  GET        ||   /tasks/:id      ||  .
-//  Edit    ||  GET        ||   /tasks/:id/edit ||  .
-//  Update  ||  PUT        ||   /tasks/:id      ||  .
-//  Destroy ||  DELETE     ||   /tasks/:id      ||  .                       */
-
+/******************************************************************************
+  ACTION  ||  HTTP VERB  ||  URL PATH       ||  DESCRIPTION
+*******************************************************************************
+  Index   ||  GET        || /tasks          ||  Display a list of tasks
+  New     ||  GET        || /tasks/new      ||  Show form for creating new task
+  Create  ||  POST       || /tasks          ||  Create a new task
+  Show    ||  GET        || /tasks/:id      ||  Display a specific task
+  Edit    ||  GET        || /tasks/:id/edit ||  Show form for editing a task
+  Update  ||  PUT        || /tasks/:id      ||  Update a specific task
+  Destroy ||  DELETE     || /tasks/:id      ||  Delete a specific task
+******************************************************************************/
 
 // GET REQUEST TO SHOW ALL TASKS
 router.get('/', function(req, res){
@@ -202,7 +211,6 @@ router.delete('/:id', function(req, res){
   In order for the rest of our application to have access to our task routes,
   we need to make it available by assigning it to the module.exports object.
  **/
-
 module.exports = router;
 
 /**
