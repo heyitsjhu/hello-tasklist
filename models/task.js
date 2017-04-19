@@ -52,7 +52,7 @@ var TaskSchema = new mongoose.Schema(
 /**
   In JS, creating modules is a very common practice. Basically, whenever you
   come across a situation where you have a bunch of related code that can be
-  extracted into its own file, you'll want to create a module that encapsulates
+  extracted into its own file, you'll want to create a module and encapsulate
   that chunk of code. Creating a mongoose schema for our Task model is one such
   case, which is why we've extracted the chunk of code above into its own file
   (this file).
