@@ -9,6 +9,9 @@ var path            = require('path');
 // body-parser parses incoming request bodies, like values submitted through
 // HTML forms. We can then retrieve those values with the  req.body property.
 var bodyParser      = require('body-parser');
+
+// method-override lets us use HTTP verbs, such as PUT and DELETE, where they
+// are not available——for example, in HTML forms.
 var methodOverride  = require('method-override');
 
 // Mongoose provides a straight-forward, schema-based solution to model your
@@ -50,10 +53,14 @@ var port = process.env.PORT || 7070;
 var app = express();
 
 /**
-  app.set()
+  Express' app.set() method assigns the first argument, the name, to the
+  second argument, the value. In our sample application, we will use two
+  properties, 'views' and 'view engine', from Express' app settings table
+  (https://expressjs.com/en/api.html#app.settings.table).
  **/
 
-// Sets the default path location for our HTML view files.
+// Sets the default path location for our HTML view files. __dirname refers
+// to the directory in which our executing script resides——in our case, APP.JS.
 app.set('views', path.join(__dirname, 'views'));
 
 // Sets the application views' default file type to 'ejs' (embedded JS).
@@ -63,13 +70,29 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 /**
-  app.use()
+ Express' app.use() method mounts middleware function(s) at the specified path.
+ The first argument is the path for which the middleware function is invoked.
+ Subsequent arguments are any number of callback functions. These mounted
+ middleware is executed every time the base of the requested path matches path.
  **/
 
+// Only parses urlencoded bodies, returning the parsed data as key-value pairs
+// inside the req.body object. The "extended" syntax, which uses the qs
+// library allows for rich objects and arrays to be encoded into the
+// URL-encoded format, allowing for a JSON-like experience with URL-encoded.
+// For more info, see: https://www.npmjs.com/package/qs#readme
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Specify a query string key as an argument that can then used to extract the
+// HTTP VERB we want to use (i.e., PUT or DELETE). Here, we're using the
+// arbitrary string, '_method'. You can name it anything but always try to pick
+// a name that best represents its purpose and functionality. To see this
+// method in action, please view the 'views/tasks/edit.ejs' file.
 app.use(methodOverride('_method'));
 
-
+// Mount the routes assigned to our taskRoutes variable to the path, '/tasks'.
+// This approach automatically prepends '/tasks' to all routes defined within
+// our 'routes/tasks' route file.
 app.use('/tasks', taskRoutes);
 
 
