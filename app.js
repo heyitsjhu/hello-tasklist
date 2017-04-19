@@ -11,8 +11,23 @@ var path            = require('path');
 var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 
+// Mongoose provides a straight-forward, schema-based solution to model your
+// application data and connect it to a MongoDB database.
+// Tutorials for setting up MongoDB locally can be found here:
+// https://docs.mongodb.com/manual/administration/install-community/
 var mongoose        = require('mongoose');
+
+// The mongoose connect() method opens a connection between our application
+// and our database. The following points to a local MongoDB database named
+// 'tasks-app'.
 mongoose.connect('mongodb://localhost/tasks-app');
+
+// Alternatively, you can use a database-as-a-service provider, such as mLab
+// (https://mlab.com/), to store your application's data. The URI provided by
+// mLab looks something like this:
+//        mongodb://<dbuser>:<dbpassword>@ds012345.mlab.com:56789/mydb
+// where <dbuser> and <dbpassword> reflects the authorized user you assign to
+// the database and 'mydb' is the name of your database.
 
 /**
   Other common types of require statements include local modules and files
