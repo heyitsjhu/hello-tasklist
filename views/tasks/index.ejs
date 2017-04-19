@@ -1,0 +1,9 @@
+<h1>This is the Index Tasks Page</h1>
+
+<% tasks.forEach(function(task) { %>
+  <li>
+    <a href="/tasks/<%= task._id %>">
+      <%= task.content %>
+    </a>
+  </li>
+<% }) %>
