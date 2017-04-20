@@ -1,18 +1,14 @@
 <% include ../partials/header %>
 
-
-    <div class="col-md-10 col-md-offset-1">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <div class="outstanding-tasks">
-            Tasks Outstanding:
-            <span class="tasks-count text-danger"><%= tasks.length %></span>
-          </div>
-          <h1 class="panel-title">List of Tasks</h1>
-        </div><!-- ./panel-heading -->
-        <ul class="list-group">
-          <% tasks.forEach(function(task) { %>
-            <li class="list-group-item task-item">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Outstanding Tasks</h2>
+      </div><!-- ./panel-heading -->
+      <ul class="list-group">
+        <% tasks.forEach(function(task) { %>
+          <% if(task.completed === false) { %>
+            <li class="list-group-item">
               <div class="row">
                 <div class="col-md-10">
                   <a href="/tasks/<%= task._id %>"><%= task.content %></a>
@@ -38,13 +34,45 @@
                         aria-hidden="true">
                       </i>
                     </form>
-                  </div>
-                </div>
-              </div>
+                  </div><!-- ./task-actions -->
+                </div><!-- ./col -->
+              </div><!-- ./row -->
             </li>
-          <% }) %>
-        </ul>
-      </div><!-- ./panel -->
-    </div><!-- ./col -->
+          <% } %>
+        <% }) %>
+      </ul>
+    </div><!-- ./panel -->
+  </div><!-- ./col -->
+
+  <div class="col-md-10 col-md-offset-1">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h2 class="panel-title">Completed Tasks</h2>
+      </div><!-- ./panel-heading -->
+      <ul class="list-group">
+        <% tasks.forEach(function(task) { %>
+          <% if(task.completed === true) { %>
+            <li class="list-group-item disabled">
+              <div class="row">
+                <div class="col-md-10">
+                  <a href="/tasks/<%= task._id %>"><%= task.content %></a>
+                </div>
+                <div class="col-md-2">
+                  <div class="task-actions">
+                    <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
+                      <i class="glyphicon glyphicon-remove task-action-icon task-delete-icon"
+                        title="remove task"
+                        aria-hidden="true">
+                      </i>
+                    </form>
+                  </div><!-- ./task-actions -->
+                </div><!-- ./col -->
+              </div><!-- ./row -->
+            </li>
+          <% } %>
+        <% }) %>
+      </ul>
+    </div><!-- ./panel -->
+  </div><!-- ./col -->
 
 <% include ../partials/footer %>

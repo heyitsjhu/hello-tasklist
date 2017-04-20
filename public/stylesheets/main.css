@@ -8,10 +8,6 @@ body {
   letter-spacing: 0.3px;
 }
 
-.outstanding-tasks {
-  float: right;
-}
-
 .tasks-count {
   padding-left: 5px;
   font-size: 1.10em;
@@ -20,26 +16,20 @@ body {
 
 .task-actions {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
 }
 
-.task-actions a,
-.task-item a {
-  color: #515151;
-}
+.task-actions * { padding-left: 10px; }
 
-.task-item-highlight {
-  background-color: #efefef;
-}
+.list-group-item a,
+.task-actions a { color: #515151; }
 
-.task-action-icon:hover {
-  cursor: pointer;
-}
+.task-item-highlight { background-color: #efefef; }
+
+.task-action-icon:hover { cursor: pointer; }
 
 .complete-task-form,
-.delete-task-form {
-  display: inline;
-}
+.delete-task-form { display: inline; }
 
 .footer {
   position: fixed;
