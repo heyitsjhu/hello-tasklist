@@ -1,8 +1,54 @@
-<h1>This is the Task SHOW PAGE</h1>
+<% include ../partials/header %>
 
-<h4><%= task.content %></h4>
+<div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h1 class="panel-title">Task Info</h1>
+    </div><!-- ./panel-heading -->
+    <div class="panel-body">
+      <h4>
+        <%= task.content %>
+      </h4>
+      <p>
+        Status:
+        <% if(task.completed) { %>
+          Completed
+        <% } else { %>
+          Not Completed
+        <% } %>
+      </p>
+      <hr>
+      <div class="">
+        <% if(task.completed) { %>
+          <button class="btn btn-success btn-sm">
+            <i class="glyphicon glyphicon-ok icons"></i>
+            Marked as Completed
+          </button>
 
-<a href="/tasks/<%= task._id %>/edit">edit this task</a>
-<form action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
-  <input type="submit" value="delete this task">
-</form>
+        <% } else { %>
+          <button class="btn btn-default btn-sm">
+            <i class="glyphicon glyphicon-ok icons"></i>
+            Mark as Completed
+          </button>
+        <% } %>%>
+        <a class="btn btn-warning btn-sm" href="/tasks/<%= task._id %>/edit">
+          <i class="glyphicon glyphicon-edit icons"></i>
+          Edit
+        </a>
+        <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST" class="delete-task-form">
+          <button class="btn btn-danger btn-sm">
+            <i class="glyphicon glyphicon-remove icons"></i>
+            Delete
+          </button>
+        </form>
+      </div>
+    </div><!-- ./panel-body -->
+    <div class="panel-footer">
+      Task ID: <%= task._id %>
+    </div><!-- ./panel-footer -->
+  </div><!-- ./panel -->
+
+  <a href="/">< back to index</a>
+</div><!-- ./col -->
+
+<% include ../partials/footer %>

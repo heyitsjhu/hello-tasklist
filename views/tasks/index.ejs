@@ -1,9 +1,50 @@
-<h1>This is the Index Tasks Page</h1>
+<% include ../partials/header %>
 
-<% tasks.forEach(function(task) { %>
-  <li>
-    <a href="/tasks/<%= task._id %>">
-      <%= task.content %>
-    </a>
-  </li>
-<% }) %>
+
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="outstanding-tasks">
+            Tasks Outstanding:
+            <span class="tasks-count text-danger"><%= tasks.length %></span>
+          </div>
+          <h1 class="panel-title">List of Tasks</h1>
+        </div><!-- ./panel-heading -->
+        <ul class="list-group">
+          <% tasks.forEach(function(task) { %>
+            <li class="list-group-item task-item">
+              <div class="row">
+                <div class="col-md-10">
+                  <a href="/tasks/<%= task._id %>"><%= task.content %></a>
+                </div>
+                <div class="col-md-2">
+                  <div class="task-actions">
+                    <form action="/tasks/<%= task._id %>?_method=PUT" method="POST">
+                      <input type="hidden" name="task[completed]" value="true">
+                      <i class="glyphicon glyphicon-ok task-completed-icon"
+                        title="mark as completed"
+                        aria-hidden="true">
+                      </i>
+                    </form>
+                    <a href="/tasks/<%= task._id %>/edit">
+                      <i class="glyphicon glyphicon-edit task-edit-icon"
+                        title="edit task"
+                        aria-hidden="true">
+                      </i>
+                    </a>
+                    <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
+                      <i class="glyphicon glyphicon-remove task-delete-icon"
+                        title="delete task"
+                        aria-hidden="true">
+                      </i>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </li>
+          <% }) %>
+        </ul>
+      </div><!-- ./panel -->
+    </div><!-- ./col -->
+
+<% include ../partials/footer %>

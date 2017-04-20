@@ -89,6 +89,8 @@ app.set('view engine', 'ejs');
   matches path.
  **/
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 /**
   Only parses urlencoded bodies, returning the parsed data as key-value pairs
   inside the req.body object. The "extended" syntax, which uses the qs
@@ -112,6 +114,15 @@ app.use(methodOverride('_method'));
 // our 'routes/tasks' route file.
 app.use('/tasks', taskRoutes);
 
+
+app.get('/', function(req, res){
+  Task.find({}, function(err, foundTasks){
+    if(err){
+      res.send(err);
+    }
+    res.render('tasks/index', {tasks: foundTasks});
+  })
+});
 
 /**
   app.listen() creates a server and listens for connections at the provided
