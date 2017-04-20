@@ -1,7 +1,31 @@
 body {
+  background-color: #FAFAFA;
   font-family: 'Arvo', serif;
   color: #515151;
 }
+
+.landing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background: #555 url('/images/glenn-carstens-peters-190592.jpg') no-repeat fixed 50% 65%;
+}
+
+.landing-content {
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  max-width: 550px;
+}
+
+.landing-heading {
+  margin-bottom: 0.5em;
+  font-size: 5em;
+}
+
+.landing-text { margin-bottom: 2em; }
 
 .panel .panel-heading h1 {
   font-weight: 700;

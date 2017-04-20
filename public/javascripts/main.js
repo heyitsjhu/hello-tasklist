@@ -54,14 +54,18 @@ var taskCompleteButton = document.getElementById('taskCompleteButton');
 var taskDeleteButton = document.getElementById('taskDeleteButton');
 
 // On click, this submits the parent form——deleting the task.
-taskCompleteButton.addEventListener('click', function(){
-  this.parentNode.submit();
-});
+if(taskCompleteButton) {
+  taskCompleteButton.addEventListener('click', function(){
+    this.parentNode.submit();
+  });
+}
 
 // On click, this submits the parent form——deleting the task.
-taskDeleteButton.addEventListener('click', function(){
-  this.parentNode.submit();
-});
+if(taskCompleteButton) {
+  taskDeleteButton.addEventListener('click', function(){
+    this.parentNode.submit();
+  });
+}
 
 // Go back to previous page.
 function goBack() {

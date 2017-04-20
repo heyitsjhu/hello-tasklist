@@ -116,12 +116,7 @@ app.use('/tasks', taskRoutes);
 
 
 app.get('/', function(req, res){
-  Task.find({}, function(err, foundTasks){
-    if(err){
-      res.send(err);
-    }
-    res.render('tasks/index', {tasks: foundTasks});
-  })
+    res.render('index');
 });
 
 /**
