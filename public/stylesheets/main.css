@@ -3,6 +3,11 @@ body {
   color: #515151;
 }
 
+.panel .panel-heading h1 {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
 .outstanding-tasks {
   float: right;
 }
@@ -23,8 +28,17 @@ body {
   color: #515151;
 }
 
+.task-item-highlight {
+  background-color: #efefef;
+}
+
+.task-action-icon:hover {
+  cursor: pointer;
+}
+
+.complete-task-form,
 .delete-task-form {
-  display: inline-block;
+  display: inline;
 }
 
 .footer {

@@ -17,38 +17,42 @@
           Not Completed
         <% } %>
       </p>
-      <hr>
-      <div class="">
-        <% if(task.completed) { %>
-          <button class="btn btn-success btn-sm">
-            <i class="glyphicon glyphicon-ok icons"></i>
-            Marked as Completed
-          </button>
 
-        <% } else { %>
-          <button class="btn btn-default btn-sm">
-            <i class="glyphicon glyphicon-ok icons"></i>
+      <hr>
+
+      <% if(task.completed) { %>
+        <button class="btn btn-success btn-sm">
+          <i class="glyphicon glyphicon-ok task-action-icon"></i>
+          Marked as Completed
+        </button>
+
+      <% } else { %>
+        <form action="/tasks/<%= task._id %>?_method=PUT" method="POST" class="complete-task-form">
+          <input type="hidden" name="task[completed]" value="true">
+          <button class="btn btn-default btn-sm" id="taskCompleteButton">
+            <i class="glyphicon glyphicon-ok task-action-icon"></i>
             Mark as Completed
           </button>
-        <% } %>%>
-        <a class="btn btn-warning btn-sm" href="/tasks/<%= task._id %>/edit">
-          <i class="glyphicon glyphicon-edit icons"></i>
-          Edit
-        </a>
-        <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST" class="delete-task-form">
-          <button class="btn btn-danger btn-sm">
-            <i class="glyphicon glyphicon-remove icons"></i>
-            Delete
-          </button>
         </form>
-      </div>
+      <% } %>%>
+      <a class="btn btn-warning btn-sm" href="/tasks/<%= task._id %>/edit">
+        <i class="glyphicon glyphicon-edit task-action-icon"></i>
+        Edit
+      </a>
+      <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST" class="delete-task-form">
+        <button class="btn btn-danger btn-sm" id="taskDeleteButton">
+          <i class="glyphicon glyphicon-remove task-action-icon"></i>
+          Delete
+        </button>
+      </form>
     </div><!-- ./panel-body -->
+
     <div class="panel-footer">
       Task ID: <%= task._id %>
     </div><!-- ./panel-footer -->
   </div><!-- ./panel -->
 
-  <a href="/">< back to index</a>
+  <button class="btn btn-default" onclick="goBack();">Go Back</button>
 </div><!-- ./col -->
 
 <% include ../partials/footer %>

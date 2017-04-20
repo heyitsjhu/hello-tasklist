@@ -21,19 +21,19 @@
                   <div class="task-actions">
                     <form action="/tasks/<%= task._id %>?_method=PUT" method="POST">
                       <input type="hidden" name="task[completed]" value="true">
-                      <i class="glyphicon glyphicon-ok task-completed-icon"
+                      <i class="glyphicon glyphicon-ok task-action-icon task-completed-icon"
                         title="mark as completed"
                         aria-hidden="true">
                       </i>
                     </form>
                     <a href="/tasks/<%= task._id %>/edit">
-                      <i class="glyphicon glyphicon-edit task-edit-icon"
+                      <i class="glyphicon glyphicon-edit task-action-icon task-edit-icon"
                         title="edit task"
                         aria-hidden="true">
                       </i>
                     </a>
                     <form action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
-                      <i class="glyphicon glyphicon-remove task-delete-icon"
+                      <i class="glyphicon glyphicon-remove task-action-icon task-delete-icon"
                         title="delete task"
                         aria-hidden="true">
                       </i>

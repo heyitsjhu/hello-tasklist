@@ -16,12 +16,13 @@
         </div>
       </form>
     </div><!-- ./panel-body -->
+
     <div class="panel-footer">
       Task ID: <%= task._id %>
     </div><!-- ./panel-footer -->
   </div><!-- ./panel -->
 
-  <a href="/tasks/<%= task._id %>">< back to task</a>
+  <button class="btn btn-default" onclick="goBack();">Go Back</button>
 </div><!-- ./col -->
 
 <% include ../partials/footer %>
