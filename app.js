@@ -6,6 +6,8 @@
  **/
 var express         = require('express');
 
+// The path module provides utilities for working with file and directory
+// paths.
 var path            = require('path');
 
 // body-parser parses incoming request bodies, like values submitted through
@@ -104,6 +106,9 @@ app.set('view engine', 'ejs');
   matches path.
  **/
 
+// The path.join() method joins all given path segments together using
+// the platform specific separator as a delimiter, then normalizes the
+// resulting path.
 app.use(express.static(path.join(__dirname, 'public')));
 
 /**
