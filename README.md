@@ -22,8 +22,8 @@ Navigate to the project's root folder and use `npm install` in your command line
 
 ### Seed Database
 
-In `app.js`, find the line with `seedDB();`—it should be a comment—and uncomment it. When you launch the server, this will create sample task entries in your application. **Every time the server is launched, `seedDB()` will wipe the database and re-seed, so make sure you comment out this line if re-seeding is not your intention.**
+In `app.js`, find the line with `seedDB();`—it should be a comment—and uncomment it. When you launch the server, this will seed your database with sample entries. **Every time the server is launched, `seedDB()` will wipe the database and re-seed, so make sure you comment out this line if re-seeding is not your intentions.**
 
 ### Start Server
 
-In the command line, run `node app.js` from root to launch your application.
+In the command line, run `node app.js` from root to launch your application. Visit http://localhost:7070 in your browser to view your app!
