@@ -4,7 +4,8 @@
   "description": "A simple Node task list application with in-file comments.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
   "author": "Johnny Hu",
   "license": "ISC",
