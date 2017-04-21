@@ -2,7 +2,7 @@
 
 A sample tasklist application built with Node.js and Express. Chock-full of in-file comments, this app is meant to be a reference guide for complete beginners. I did my best to explain the purpose of each line of Node.js and Express code.
 
-To view a working demo of the application, click here.
+To view a working demo of the application, [click here](https://tasklist-sample-app.herokuapp.com/).
 
 ## Local Setup
 
