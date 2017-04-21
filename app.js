@@ -51,6 +51,10 @@ var Task        = require('./models/task');
 // files for in-depth explanations on RESTful routing and conventions.
 var taskRoutes  = require('./routes/tasks');
 
+// Import sample task data that can be used to seed the database. View the
+// seeds.js file in the root directory for more info.
+var seedDB = require('./seeds')
+
 /**
   Assigns the environment variable PORT, if present, to the variable, port,
   otherwise sets an arbitrary value——in this case, 7070. This variable is
@@ -59,7 +63,18 @@ var taskRoutes  = require('./routes/tasks');
  **/
 var port = process.env.PORT || 7070;
 
-//
+/**
+  Seeds the database with sample data whenever the server starts.
+  NOTE: This function will wipe the database prior to seedning, so
+  if that's not your intention, make sure you comment this out after
+  your first seed, so it doesn't erase any new data you submit while
+  using the application.
+ **/
+// seedDB();
+
+// A common convention is to assign Express to a variable, named app.
+// This makes the code more expressive and easier to read (referring
+// to app as opposed to express just makes more sense!).
 var app = express();
 
 /**
@@ -114,7 +129,7 @@ app.use(methodOverride('_method'));
 // our 'routes/tasks' route file.
 app.use('/tasks', taskRoutes);
 
-
+// This route retrieves the root page of the application.
 app.get('/', function(req, res){
     res.render('index');
 });
