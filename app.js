@@ -29,7 +29,8 @@ var mongoose        = require('mongoose');
 // The mongoose connect() method opens a connection between our application
 // and our database. The following points to a local MongoDB database named
 // 'tasks-app'.
-mongoose.connect('mongodb://localhost/tasks-app');
+// mongoose.connect('mongodb://localhost/tasks-app');
+mongoose.connect('mongodb://johnny:johnnymlab@ds139899.mlab.com:39899/tasklist-sample-app');
 
 /**
   Alternatively, you can use a database-as-a-service provider, such as mLab
