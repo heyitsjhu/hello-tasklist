@@ -1,6 +1,13 @@
 // APP.JS
 
 /**
+  Dotenv is a zero-dependency module that loads environment variables from a
+  .env file into process.env. This keeps sensitive information like OAUTH and
+  API keys safe from the public—especially in open-source projects.
+ **/
+require('dotenv').config();
+
+/**
   Require statements allow us to import necessary modules for our application.
   The most common types of modules are third-party packages found on NPM.
  **/
@@ -30,7 +37,7 @@ var mongoose        = require('mongoose');
 // and our database. The following points to a local MongoDB database named
 // 'tasks-app'.
 // mongoose.connect('mongodb://localhost/tasks-app');
-mongoose.connect('mongodb://johnny:johnnymlab@ds139899.mlab.com:39899/tasklist-sample-app');
+mongoose.connect('mongodb://'+ process.env.MONGODB_USER + ':' + process.env.MONGODB_PW + '@ds139899.mlab.com:39899/tasklist-sample-app');
 
 /**
   Alternatively, you can use a database-as-a-service provider, such as mLab
