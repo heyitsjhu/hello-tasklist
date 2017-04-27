@@ -1,6 +1,6 @@
 {
   "name": "node-tasks-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A simple Node task list application with in-file comments.",
   "main": "app.js",
   "scripts": {
