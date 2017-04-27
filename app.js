@@ -25,6 +25,10 @@ var bodyParser      = require('body-parser');
 // are not available——for example, in HTML forms.
 var methodOverride  = require('method-override');
 
+// connect-flash allows us to set useful messages we can then display back to
+// the user.
+var flash           = require('connect-flash');
+
 /**
   Mongoose provides a straight-forward, schema-based solution to model your
   application data and connect it to a MongoDB database.
@@ -63,7 +67,7 @@ var taskRoutes  = require('./routes/tasks');
 
 // Import sample task data that can be used to seed the database. View the
 // seeds.js file in the root directory for more info.
-var seedDB = require('./seeds')
+var seedDB      = require('./seeds')
 
 /**
   Assigns the environment variable PORT, if present, to the variable, port,
@@ -136,6 +140,37 @@ app.use(bodyParser.urlencoded({ extended: true }));
   method in action, please view the 'views/tasks/edit.ejs' file.
  **/
 app.use(methodOverride('_method'));
+
+
+/**
+  express-session is a middleware that lets us set session ID data on the server-side. For our purposes, a sessions is necessary when storing flash messages, which is why we're using it here.
+ **/
+app.use(require('express-session')({
+  // used to sign the session ID. Can be a string or an array of strings.
+  secret: 'lynx point siamese',
+
+  // if true, forces the session to be saved even if a change wasn't made.
+  resave: false,
+
+  // if true, forces an uninitialized—a new but not modified—session to be saved.
+  saveUninitialized: false
+}));
+
+app.use(flash());
+
+/**
+  Local response variables can be used to store information. The variables are
+  reassigned every time there's a new request made to the application. Here,
+  we're storing flash messages to local variables, flashSuccess and
+  flashError, which are then accessible in our views.
+  NOTE: This section should come BEFORE the inclusion of your routes.
+ **/
+app.use(function(req, res, next){
+  res.locals.flashSuccess = req.flash('success');
+  res.locals.flashError = req.flash('error');
+  next();
+});
+
 
 // Mount the routes assigned to our taskRoutes variable to the path, '/tasks'.
 // This approach automatically prepends '/tasks' to all routes defined within

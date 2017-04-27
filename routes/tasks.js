@@ -98,12 +98,17 @@ router.post('/', function(req, res){
    **/
   Task.create(task, function(err, newTask){
     if(err){
+      req.flash('error', "Sorry, we couldn't create your task. Try again.");
       res.send(err.message);
     }
 
     // Save our instance of Task to the database.
     newTask.save();
     console.log(newTask);
+    // Adds a flash message to our flash object, which is then retrieved by our
+    // local response variable, flash_message (see app.js), for us to use in
+    // our views.
+    req.flash('success', 'Task added to list successfully!');
     // Redirect the user to newly created task's SHOW page.
     res.redirect('/tasks/' + newTask._id);
   });
@@ -124,6 +129,8 @@ router.get('/:id', function(req, res){
    **/
   Task.findById(req.params.id, function(err, foundTask){
     if(err){
+      // Adds a flash message.
+      req.flash('error', "Sorry we couldn't find the task you're looking for.");
       res.send(err.message);
     }
 
@@ -139,6 +146,8 @@ router.get('/:id/edit', function(req, res){
   // Look for task in database whose ID matches the one stored in req.params.id
   Task.findById(req.params.id, function(err, foundTask){
     if(err){
+      // Adds a flash message.
+      req.flash('error', "Sorry we couldn't find the task you're looking for.");
       res.send(err.message);
     }
 
@@ -180,8 +189,11 @@ router.put('/:id', function(req, res){
    **/
   Task.findByIdAndUpdate(req.params.id, req.body.task, function(err, updatedTask) {
     if(err) {
+      req.flash('error', "Sorry, we were unable to update your task. Try again");
       res.send(err.message);
     }
+    // Adds a flash message.
+    req.flash('success', "Task updated successfully.");
     // Redirect to the updated task's SHOW page.
     res.redirect('/tasks/' + updatedTask._id);
   });
@@ -196,8 +208,11 @@ router.delete('/:id', function(req, res){
    **/
   Task.findByIdAndRemove(req.params.id, function(err){
     if(err){
+      req.flash('error', "Uh oh! Something went really wrong!");
       res.send(err.message);
     }
+    // Adds a flash message.
+    req.flash('success', "Task removed from list forever!");
     res.redirect('/tasks');
   });
 });
